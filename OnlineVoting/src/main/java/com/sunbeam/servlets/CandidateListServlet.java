@@ -30,8 +30,8 @@ public class CandidateListServlet extends HttpServlet{
 	
 	protected void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		List<Candidate> list = new ArrayList<Candidate>();
-		try(CandidateDao candDao = new CandidateDaoImpl()){
-			list = candDao.findAll();
+		try(CandidateDao canDao = new CandidateDaoImpl()){
+			list = canDao.findAll();
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new ServletException(e);
@@ -44,6 +44,19 @@ public class CandidateListServlet extends HttpServlet{
 				out.println("</head>");
 				out.println("<body>");
 				out.println("<h3>Online Voting</h3>");
+				
+				String userName = "";
+					Cookie[] arr = req.getCookies();
+					if(arr != null) {
+						for (Cookie c : arr) {
+							if(c.getName().equals("uname")) {
+								userName = c.getValue();
+								break;
+							}
+						}
+					}
+						out.printf("Hello, %s<hr/>\n", userName);
+				
 				out.println("<form method='post' action='vote'>");
 				for (Candidate c : list) {
 					// <input type='radio' name='candidate' value='submit-value'/> display-label

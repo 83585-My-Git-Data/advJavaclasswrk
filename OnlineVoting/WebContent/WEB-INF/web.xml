@@ -28,4 +28,34 @@
   	<url-pattern>/candlist</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  <servlet-name>Vote</servlet-name>
+  <servlet-class>com.sunbeam.servlets.VoteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>Vote</servlet-name>
+  <url-pattern>/vote</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>Logout</servlet-name>
+  	<servlet-class>com.sunbeam.servlets.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Logout</servlet-name>
+  	<url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  
+  
+ 	
+ <servlet>
+  	<servlet-name>Result</servlet-name>
+  	<servlet-class>com.sunbeam.servlets.Resultservlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Result</servlet-name>
+  	<url-pattern>/result</url-pattern>
+  </servlet-mapping>
+ 	
+  
 </web-app>

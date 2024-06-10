@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sunbeam.dao.UserDao;
 import com.sunbeam.dao.UserDaoImpl;
@@ -31,6 +33,14 @@ public class LoginServlet extends HttpServlet {
 			User user = userDao.findByEmail(email);
 			if(user != null && user.getPassword().equals(passwd)) {
 				//login Successful
+				
+				Cookie c = new Cookie ("uname", user.getFirstName());
+				c.setMaxAge(3600);
+				resp.addCookie(c);
+				
+				HttpSession session = req.getSession();
+				session.setAttribute("curuser", user);
+				
 				System.out.println("Login Successful");
 				if(user.getRole().equals("voter")) { 
 					resp.sendRedirect("candlist");
